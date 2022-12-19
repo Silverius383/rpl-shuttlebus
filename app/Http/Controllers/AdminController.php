@@ -54,5 +54,7 @@ class AdminController extends Controller
         $pdfHtml = $pdf->output();
 
             Mail::to($user_email)->send(new validasi($booking, $users, $user, $pdfHtml));
+            Session::flash('success', 'Email Berhasil Terkirim ke ' .$user_email);
+        return redirect(route('admin.indexbus'));
     }
 }
