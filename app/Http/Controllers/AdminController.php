@@ -36,15 +36,21 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.admin-dashboard');
+        $buses = Bus::all();
+        $book = Booking::all();
+        $jadwal = BusSchedule::all();
+        $stasiun = Station::all();
+        return view('admin.admin-dashboard', compact('buses','book', 'jadwal', 'stasiun'));
     }
     public function indexbus()
     {
         $order = Booking::all();
         $buses = Bus::all();
+        
         return view('admin.admin-validasi', ['layout' => 'checklist', 'booking' => $order, 'buses' => $buses]);
     }
     public function sendmail(int $booking_id){
+        
         $booking = Booking::where('booking_id', $booking_id)->first();
         $users = DB::table('v_bus')->select('booking_id','bus_id','bus_name','price','bus_num')->get();
         $user = User::where('id', $booking->customer_id)->first();
