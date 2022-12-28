@@ -9,6 +9,8 @@ use App\Booking;
 use App\Station;
 use DB;
 use Auth;
+use Stevebauman\Location\Facades\Location;
+
 
 class HomeController extends Controller
 {
@@ -27,10 +29,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $req)
     {
         $stations = Station::all();
-        return view('customer.index',compact('stations'), ['layout' => 'index'],['cek' => 'customer']);
+        $ip = $req->ip();
+        /*Dynamic IP address */
+        $ip = '36.75.182.0';
+        /* Static IP address */
+        $currentUserInfo = Location::get('https://'.$ip);
+        return view('customer.index',compact('stations','currentUserInfo'), ['layout' => 'index'],['cek' => 'customer']);
     }
 
     public function enquiry(Request $request)
@@ -38,7 +45,11 @@ class HomeController extends Controller
         $source = ucfirst($request->source);
         $dest = ucfirst($request->destination);
         $date = $request->travel_date;
-
+        $ip = $request->ip();
+        /*Dynamic IP address */
+        $ip = '36.75.182.0';
+        /* Static IP address */
+        $currentUserInfo = Location::get('https://'.$ip);
         $buses = Bus::all();
         $stations = Station::all();
 
@@ -49,13 +60,18 @@ class HomeController extends Controller
             ->where('dropoff_address', $dest)
             ->paginate(10);
 
-        return view('customer.index', ['schedules' => $schedules, 'layout' => 'schedules', 'buses' => $buses, 'source' => $source, 'dest' => $dest, 'date' => $date]);
+        return view('customer.index',compact('stations','currentUserInfo'), ['schedules' => $schedules, 'layout' => 'schedules', 'buses' => $buses, 'source' => $source, 'dest' => $dest, 'date' => $date]);
     }
 
     public function showall(Request $request)
     {
+        $ip = $request->ip();
+        /*Dynamic IP address */
+        $ip = '36.75.182.0';
+        /* Static IP address */
+        $currentUserInfo = Location::get('https://'.$ip);
         $schedules = DB::table('bus_schedules')->paginate(10);
         $buses = Bus::get();
-        return view('customer.index', ['schedules' => $schedules, 'layout' => 'allSchedules', 'buses' => $buses]);
+        return view('customer.index',compact('currentUserInfo'), ['schedules' => $schedules, 'layout' => 'allSchedules', 'buses' => $buses]);
     }
 }

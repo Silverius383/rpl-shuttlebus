@@ -61,7 +61,8 @@
                                     @csrf
                                     {{--<label for= "source"> Asal</label> --}}
                                     <select name="source" id="source" class="form-control" required>
-                                        <option value="" selected="true" disabled="true">Pilih Stasiun Keberangkatan
+                                        <option value="{{ $currentUserInfo->cityName}}" selected="true">
+                                            {{ $currentUserInfo->cityName}}
                                         </option>
                                         @foreach ($stations as $list)
                                         <option value="{{$list->name}}">{{$list->name}}</option>
@@ -110,15 +111,26 @@
                             <form action="{{ url('/home/enquiry')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="source">Source</label>
-                                    <input name="source" value="{{ $source }}" id="source" type="text"
-                                        class="form-control" placeholder="Enter Source Address">
+                                    <select name="source" id="source" class="form-control">
+                                        <option value="" selected="true">Pilih Stasiun Keberangkatan
+                                        </option>
+                                        @foreach ($stations as $list)
+                                        <option value="{{$list->name}}">{{$list->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="destination">Destination</label>
-                                    <input name="destination" value="{{ $dest }}" id="destination" type="text"
-                                        class="form-control" placeholder="Enter destination Address">
+                                    {{--<label for= "destination"> Tujuan</label> --}}
+
+                                    <select name="destination" id="destination" class="form-control">
+                                        <option value="" selected="true">Pilih Stasiun Akhir
+                                        </option>
+                                        @foreach ($stations as $list)
+                                        <option value="{{$list->name}}">{{$list->name}}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="travel_date">Travel Date</label>
                                     <input name="travel_date" value="{{ $date }}" id="travel_date" type="date"
@@ -183,14 +195,19 @@
                                                     <?php for ($i=1; $i<=$bus->total_seats ; $i++) { ?>
                                                     <div class="col-md-3">
                                                         @if ($schedule->status == 0)
-                                                        <input type="checkbox" id="seats" name="seats_booked[]" value="{{ $i }}" <?php if(in_array("$i", (array)$seats)){ ?> checked disabled="true" <?php } ?>> {{ $i }}
+                                                        <input type="checkbox" id="seats" name="seats_booked[]"
+                                                            value="{{ $i }}" <?php if(in_array("$i", (array)$seats)){ ?>
+                                                            checked disabled="true" <?php } ?>> {{ $i }}
                                                         @elseif ($schedule->status == 1)
-                                                        <input type="checkbox" id="seats" name="seats_booked[]" value="{{ $i }}" checked readonly="readonly"> {{ $i }}
+                                                        <input type="checkbox" id="seats" name="seats_booked[]"
+                                                            value="{{ $i }}" checked readonly="readonly"> {{ $i }}
                                                         @endif
                                                     </div>
                                                     <?php } ?>
                                                     <div class="col-md-3">
-                                                        <input name="institusi" type="checkbox" id="select-all" <?php if($schedule->status == 1){ ?> checked readonly="readonly" <?php } ?>>
+                                                        <input name="institusi" type="checkbox" id="select-all"
+                                                            <?php if($schedule->status == 1){ ?> checked
+                                                            readonly="readonly" <?php } ?>>
                                                         <label for="select-all">Pilih semua</label>
                                                     </div>
                                                 </div>
@@ -411,10 +428,9 @@
             checkbox.checked = this.checked;
         }
     }
-    $('input[type="checkbox"][readonly="readonly"]').click(function(e){
-    e.preventDefault();
-});
-
+    $('input[type="checkbox"][readonly="readonly"]').click(function(e) {
+        e.preventDefault();
+    });
     </script>
 
 </body>

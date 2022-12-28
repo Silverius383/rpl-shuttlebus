@@ -16,4 +16,13 @@
         </li>
       </ul>
     </div>
+    <div>
+    @if ($currentUserInfo)
+                            <li class="nav-item">
+                                <a class="nav-link active scrollTo" aria-current="page" href="#">Lokasi Anda :
+                                    {{ $currentUserInfo->cityName }}</a>
+                            </li>
+                        @endif
+    </div>
+
 </nav>
