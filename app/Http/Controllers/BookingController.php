@@ -12,6 +12,7 @@ use Auth;
 use DB;
 use Session;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Stevebauman\Location\Facades\Location;
 
 
 class BookingController extends Controller
@@ -29,12 +30,18 @@ class BookingController extends Controller
 
     }
     
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user()->id;
         $order = Booking::where(['customer_id' => $user])->get();
         $buses = Bus::all();
-        return view('customer.index', ['layout' => 'checklist', 'booking' => $order, 'buses' => $buses]);
+        $stations = Station::all();
+            $ip = $request->ip();
+            /*Dynamic IP address */
+            $ip = '36.75.182.0';
+            /* Static IP address */
+            $currentUserInfo = Location::get('https://'.$ip);
+        return view('customer.index', compact('stations','currentUserInfo'), ['layout' => 'checklist', 'booking' => $order, 'buses' => $buses]);
     }
 
     /**
@@ -42,16 +49,34 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($schedule_id)
+    public function create(Request $request, $schedule_id)
     {
+        
+        $users = DB::table('bookings')->select('booking_id','customer_id','bus_id','pid','schedule_id','seats_booked','source','destination','total_price','status')->where('schedule_id', '=', $schedule_id)->get();
         $booking = DB::table('bookings')->where('schedule_id', '=', $schedule_id)->first();
         $schedule = DB::table('bus_schedules')->where('schedule_id', '=', $schedule_id)->first();
         $bus = DB::table('buses')->where('bus_id', '=', $schedule->bus_id)->first();
-            $seats = json_decode($booking->seats_booked);
-        // $seats = json_encode(count((array)$booking));
+
+        $v = $users;
+        $u = [];
+        for ($i=0; $i <=count($v) ; $i++) {
+            foreach ((array)json_decode($v[$i]->seats_booked ?? '') as $item) {
+                $u[] = $item;
+            }  
+        }
+        
+        $seats = $u;
+       
+            $stations = Station::all();
+            $ip = $request->ip();
+            /*Dynamic IP address */
+            $ip = '36.75.182.0';
+            /* Static IP address */
+            $currentUserInfo = Location::get('https://'.$ip);
+            
 
         
-        return view('customer.index', ['schedule' => $schedule, 'layout' => 'addBooking', 'seats' => $seats, 'bus' => $bus, 'booking' => $booking]);
+        return view('customer.index', compact('stations','currentUserInfo'), ['schedule' => $schedule, 'layout' => 'addBooking', 'seats' => $seats, 'bus' => $bus, 'booking' => $booking]);
     }
 
     /**
@@ -110,10 +135,16 @@ class BookingController extends Controller
                 $user = Auth::user()->id;
                 $booking = Booking::where(['customer_id' => $user])->get();
                 $buses = Bus::all();
+                $stations = Station::all();
+            $ip = $request->ip();
+            /*Dynamic IP address */
+            $ip = '36.75.182.0';
+            /* Static IP address */
+            $currentUserInfo = Location::get('https://'.$ip);
 
                 Session::flash('success', 'Your Seat Booked Successsfully');
 
-                return view('customer.index', ['layout' => 'checklist', 'buses' => $buses, 'bus'    =>$bus, 'bookings' => $bookings, 'booking' => $booking]);
+                return view('customer.index', compact('stations','currentUserInfo'), ['layout' => 'checklist', 'buses' => $buses, 'bus'    =>$bus, 'bookings' => $bookings, 'booking' => $booking]);
         //     }else{
         //         Session::flash('success', 'Please Check Your Source Address');
         //     return redirect()->back();

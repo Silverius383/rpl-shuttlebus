@@ -196,7 +196,7 @@
                                                     <div class="col-md-3">
                                                         @if ($schedule->status == 0)
                                                         <input type="checkbox" id="seats" name="seats_booked[]"
-                                                            value="{{ $i }}" <?php if(in_array("$i", (array)$seats)){ ?>
+                                                            value="{{ $i }}" <?php if(in_array($i, $seats)!==false){ ?>
                                                             checked disabled="true" <?php } ?>> {{ $i }}
                                                         @elseif ($schedule->status == 1)
                                                         <input type="checkbox" id="seats" name="seats_booked[]"
