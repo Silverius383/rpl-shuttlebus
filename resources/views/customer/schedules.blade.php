@@ -64,8 +64,5 @@
         <a href="{{ url('/home')}}" class="btn btn-primary a-btn-slide-text">
             <span aria-hidden="true">Manual Search</span>
         </a>
-        <a href="{{ url('/Institusi')}}" class="btn btn-warning a-btn-slide-text">
-            <span aria-hidden="true">Pesan Institusi</span>
-        </a>
     </div>
 </div>

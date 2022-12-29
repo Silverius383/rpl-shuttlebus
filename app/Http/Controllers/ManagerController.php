@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Booking;
+use App\Bus; 
+use App\BusSchedule;
+use App\Station;
 use Illuminate\Http\Request;
 
 class ManagerController extends Controller
@@ -24,6 +27,10 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        return view('manager.manager-dashboard');
+        $buses = Bus::all();
+        $book = Booking::all();
+        $jadwal = BusSchedule::all();
+        $stasiun = Station::all();
+        return view('manager.manager-dashboard', compact('buses','book', 'jadwal', 'stasiun'));
     }
 }
