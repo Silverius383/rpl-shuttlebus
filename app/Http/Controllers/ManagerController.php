@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Booking;
+use App\Bus; 
+use App\BusSchedule;
+use App\Station;
 use Illuminate\Http\Request;
 use Auth;
 use App\Booking;
