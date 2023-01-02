@@ -41,7 +41,7 @@ class ManagerLoginController extends Controller
 
     public function logout()
     {
-        Auth::guard('manager')->logout();
+        Auth::guard('web')->logout();
         return redirect('/manager/login');
     }
 }
