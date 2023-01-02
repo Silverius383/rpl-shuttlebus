@@ -19,8 +19,8 @@
             <p>Jadwal Bus</p>
           </a>
         </li>
-      <li class="nav-item ">
-      <a class="nav-link" href="#">
+      <li class="nav-item {{  request()->routeIs('pesanan.index') ? 'active' : '' }}">
+      <a class="nav-link" href="{{route('pesanan.index')}}">
           {{-- <i class="material-icons">content_paste</i> --}}
           <p>Pemesanan</p>
         </a>

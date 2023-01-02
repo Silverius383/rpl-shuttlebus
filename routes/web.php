@@ -53,6 +53,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/booking', 'AdminController@indexbus')->name('admin.indexbus');
     Route::get('/booking/{booking_id}/sendmail', 'AdminController@sendmail');
+    Route::get('/pesanan', 'OrderController@index')->name('admin.pesanan');
 
 
 
@@ -61,6 +62,7 @@ Route::prefix('admin')->group(function(){
 
     // Station Route
     Route::Resource('station', 'StationController');
+    Route::Resource('pesanan', 'OrderController');
     // Bus Route
     Route::Resource('bus', 'BusController');
     // Route BusSchedule
