@@ -55,9 +55,12 @@ Route::prefix('admin')->group(function(){
     Route::get('/booking', 'AdminController@indexbus')->name('admin.indexbus');
     Route::get('/booking/{booking_id}/sendmail', 'AdminController@sendmail');
     Route::get('/pesanan', 'OrderController@index')->name('admin.pesanan');
-    Route::post('/tanggal', 'AdminController@caritanggal')->name('admin.dashboard');
-    Route::post('/rute', 'AdminController@rute')->name('admin.dashboard');
     Route::get('/pesanan/downloadpdf', 'OrderController@downloadpdf');
+    Route::post('/tanggal', 'AdminController@caritanggal');
+    Route::post('/rute', 'AdminController@rute');
+    Route::post('/institusi', 'AdminController@institusiperkota');
+    
+
 
 
     Route::get('/register', 'Auth\AdminRegisterController@showRegistrationForm')->name('admin.register');
@@ -85,8 +88,9 @@ Route::prefix('manager')->group(function(){
     Route::post('/login', 'Auth\ManagerLoginController@login')->name('manager.login.submit');
     Route::get('/', 'ManagerController@index')->name('manager.dashboard');
     Route::get('/logout', 'Auth\ManagerLoginController@logout')->name('manager.logout');
-    Route::post('/tanggal', 'ManagerController@caritanggalmg')->name('manager.dashboard');
-    Route::post('/rute', 'ManagerController@rute')->name('manager.dashboard');
+    Route::post('/tanggal', 'ManagerController@caritanggalmg');
+    Route::post('/rute', 'ManagerController@rute');
+    Route::post('/institusi', 'ManagerController@institusiperkota');
 
     Route::get('/register', 'Auth\ManagerRegisterController@showRegistrationForm')->name('manager.register');
     Route::post('/register', 'Auth\ManagerRegisterController@register')->name('manager.register.submit');

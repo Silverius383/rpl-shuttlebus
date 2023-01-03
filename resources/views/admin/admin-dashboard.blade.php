@@ -155,7 +155,7 @@
                                     </div>
                                 </div>
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Total
-                                        Jadwal per periode</a></div>
+                                        Transaksi per periode</a></div>
                                 <div class="h2 mb-0 font-weight-bold text-gray-800 ">
                                     {{ $data->count() }}
                                 </div>
@@ -190,9 +190,44 @@
                                     </div>
                                 </div>
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Total
-                                        Jadwal per Rute</a></div>
+                                        Transaksi per Rute</a></div>
                                 <div class="h2 mb-0 font-weight-bold text-gray-800 ">
-                                    {{ $jadwalrute->count() }}
+                                    {{ $perrute->count() }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <form method="post" action="{{ url('/admin/institusi')}}" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a
+                                        href="">Masukkan Kota</a></div>
+                                <div>
+                                    <div class="form-group">
+                                        <select name="kota" id="kota" class="form-control" required>
+                                            @foreach ($stasiun as $list)
+                                            <option value="{{$list->name}}">
+                                                {{$list->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                    </div>
+                                </div>
+                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Total
+                                        Institusi per Kota</a></div>
+                                <div class="h2 mb-0 font-weight-bold text-gray-800 ">
+                                    {{ $perkota->count() }}
                                 </div>
                             </div>
                         </div>

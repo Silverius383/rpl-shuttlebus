@@ -40,12 +40,14 @@ class ManagerController extends Controller
         $waktuakhir = $request->waktuakhir;
         $tanggal_awal = date('Y-m-d',strtotime('waktuawal'));
         $tanggal_akhir = date('Y-m-d',strtotime('waktuakhir'));
+        $data = Booking::whereDate('created_at','>=',$tanggal_awal)->whereDate('created_at','<=',$tanggal_akhir)->get();
         $rute = $request->rute;
+        $kota = $request->kota;
         $jadwal = BusSchedule::all();
         $jadwalrute = BusSchedule::where('schedule_id', '=', $rute);
-        $perKota =  Booking::where('schedule_id', $rute);
-        $data = Booking::whereDate('created_at','>=',$tanggal_awal)->whereDate('created_at','<=',$tanggal_akhir)->get();
-        return view('manager.manager-dashboard', compact('buses','book','dalam', 'luar', 'jadwal','jadwalrute',  'data' ,  'stasiun', 'institut'));
+        $perrute =  Booking::where('schedule_id', $rute);
+        $perkota =  BusSchedule::where('pickup_address', $kota)->where('status', 1);
+        return view('manager.manager-dashboard', compact('buses','book','dalam', 'luar', 'jadwal', 'stasiun','perkota', 'perrute',  'institut', 'data'));
     }
     public function caritanggalmg(Request $request)
     {
@@ -58,14 +60,14 @@ class ManagerController extends Controller
         $institut = BusSchedule::where('status', '=', '1');
         $tanggal_awal = $request->waktuawal;
         $tanggal_akhir = $request->waktuakhir;
-        // $tanggal_awal = date('Y-m-d',strtotime('waktuawal'));
-        // $tanggal_akhir = date('Y-m-d',strtotime('waktuakhir'));
         $data = Booking::whereDate('created_at','>=',$tanggal_awal)->whereDate('created_at','<=',$tanggal_akhir)->get();
         $rute = $request->rute;
+        $kota = $request->kota;
         $jadwal = BusSchedule::all();
         $jadwalrute = BusSchedule::where('schedule_id', '=', $rute);
-        $perKota =  Booking::where('schedule_id', $rute);
-        return view('manager.manager-dashboard', compact('buses','book','dalam', 'luar', 'jadwal', 'stasiun', 'institut', 'data', 'jadwalrute'));
+        $perrute =  Booking::where('schedule_id', $rute);
+        $perkota =  BusSchedule::where('pickup_address', $kota)->where('status', 1);
+        return view('manager.manager-dashboard', compact('buses','book','dalam', 'luar', 'jadwal','perrute', 'perkota', 'stasiun', 'institut', 'data'));
     }
     public function rute(Request $request)
     {
@@ -82,9 +84,33 @@ class ManagerController extends Controller
         $tanggal_akhir = date('Y-m-d',strtotime('waktuakhir'));
         $data = Booking::whereDate('created_at','>=',$tanggal_awal)->whereDate('created_at','<=',$tanggal_akhir)->get();
         $rute = $request->rute;
+        $kota = $request->kota;
         $jadwal = BusSchedule::all();
         $jadwalrute = BusSchedule::where('schedule_id', '=', $rute);
-        $perKota =  Booking::where('schedule_id', $rute);
-        return view('manager.manager-dashboard', compact('buses','book','dalam', 'luar', 'jadwal','jadwalrute', 'stasiun', 'institut', 'data'));
+        $perrute =  Booking::where('schedule_id', $rute);
+        $perkota =  BusSchedule::where('pickup_address', $kota)->where('status', 1);
+        return view('manager.manager-dashboard', compact('buses','book','dalam', 'luar', 'jadwal','perrute', 'perkota', 'stasiun', 'institut', 'data'));
+    }
+    public function institusiperkota(Request $request)
+    {
+        $buses = Bus::all();
+        $book = Booking::all();
+        $jadwal = BusSchedule::all();
+        $stasiun = Station::all();
+        $dalam = BusSchedule::whereColumn('dropoff_address', '=', 'pickup_address');
+        $luar = BusSchedule::whereColumn('dropoff_address', '!=', 'pickup_address');
+        $institut = BusSchedule::where('status', '=', '1');
+        $tanggal_awal = $request->waktuawal;
+        $tanggal_akhir = $request->waktuakhir;
+        $tanggal_awal = date('Y-m-d',strtotime('waktuawal'));
+        $tanggal_akhir = date('Y-m-d',strtotime('waktuakhir'));
+        $data = Booking::whereDate('created_at','>=',$tanggal_awal)->whereDate('created_at','<=',$tanggal_akhir)->get();
+        $rute = $request->rute;
+        $kota = $request->kota;
+        $jadwal = BusSchedule::all();
+        $jadwalrute = BusSchedule::where('schedule_id', '=', $rute);
+        $perrute =  Booking::where('schedule_id', $rute);
+        $perkota =  BusSchedule::where('pickup_address', $kota)->where('status', 1);
+        return view('manager.manager-dashboard', compact('buses','book','dalam', 'luar', 'jadwal','perrute', 'perkota', 'stasiun', 'institut', 'data'));
     }
 }
