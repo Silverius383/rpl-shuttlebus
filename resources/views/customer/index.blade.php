@@ -195,9 +195,7 @@
                                                     <?php for ($i=1; $i<=$bus->total_seats ; $i++) { ?>
                                                     <div class="col-md-3">
                                                         @if ($schedule->status == 0)
-                                                        <input type="checkbox" id="seats" name="seats_booked[]"
-                                                            value="{{ $i }}" <?php if(in_array($i, $seats)!==false){ ?>
-                                                            checked disabled="true" <?php } ?>> {{ $i }}
+                                                        <input type="checkbox" id="seats" name="seats_booked[]" value="{{ $i }}" <?php if(in_array($i, $seats)!==false){ ?> checked disabled="true" <?php } ?>> {{ $i }}
                                                         @elseif ($schedule->status == 1)
                                                         <input type="checkbox" id="seats" name="seats_booked[]"
                                                             value="{{ $i }}" checked readonly="readonly"> {{ $i }}

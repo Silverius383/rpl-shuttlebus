@@ -26,7 +26,12 @@
             @foreach ($booking as $key => $booking)
             <tr>
                 <th scope="row">{{$key+1}}</th>
-                <td>{{ Auth::user()->fname }} {{Auth::user()->lname}}</td>
+                <td>@foreach ($users as $user)
+                    @if ($user->id == $booking->customer_id)
+                        {{ $user->fname }}
+                        {{ $user->lname }}
+                    @endif
+                @endforeach</td>
                 <td>
                 @foreach ($buses as $bus)
                     @if ($bus->bus_id == $booking->bus_id)
@@ -51,17 +56,17 @@
                 </td>
                 <td>
                     @if ($booking->status == 1)
-                        Reserved
+                        Verified
                     @else
-                        Booked
+                        Unverified
                     @endif
                 </td>
                 <td> 
                     <div class="row " >
                         <div>
-                        <a href="/home/booking/{{ $booking->booking_id }}/downloadpdf" class="btn btn-sm btn-warning">download</a>
-                        <a href="/admin/booking/{{ $booking->booking_id }}/sendmail" class="btn btn-sm btn-warning">mail</a>
-                        <a href="/home/booking/{{ $booking->booking_id }}/viewpdf" class="btn btn-sm btn-warning">view</a>
+                        <a href="/home/booking/{{ $booking->booking_id }}/downloadpdf" class="btn btn-sm btn-warning">Download</a>
+                        <a href="/admin/booking/{{ $booking->booking_id }}/sendmail" class="btn btn-sm btn-info">Verify Ticket</a>
+                        <a href="/home/booking/{{ $booking->booking_id }}/viewpdf" class="btn btn-sm btn-warning">View</a>
                         </div>                      
                     </div>
                   </td>

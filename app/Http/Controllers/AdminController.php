@@ -97,8 +97,10 @@ class AdminController extends Controller
     {
         $order = Booking::all();
         $buses = Bus::all();
+        // $user = DB::table('users')->select('fname', 'lname')->where('customer_id', '=', $customer_id )->get();
+        $users = User::all();
         
-        return view('admin.admin-validasi', ['layout' => 'checklist', 'booking' => $order, 'buses' => $buses]);
+        return view('admin.admin-validasi', ['layout' => 'checklist', 'booking' => $order, 'buses' => $buses, 'users' => $users]);
     }
     public function sendmail(int $booking_id){
         
@@ -111,6 +113,9 @@ class AdminController extends Controller
         $pdfHtml = $pdf->output();
 
             Mail::to($user_email)->send(new validasi($booking, $users, $user, $pdfHtml));
+            DB::table('bookings')->where('booking_id', $booking_id)->update(array(
+                'status' => '1'));
+            $booking->save();
             Session::flash('success', 'Email Berhasil Terkirim ke ' .$user_email);
         return redirect(route('admin.indexbus'));
     }

@@ -48,4 +48,18 @@ class OrderController extends Controller
 
     }
     
+    public function downloadpdf(){
+        $data = \DB::table('bookings')
+       ->select([
+        \DB::raw('count(*) as jumlah'),
+        \DB::raw('DATE(created_at) as tanggal')
+       ])
+       ->groupBy('tanggal')
+       ->orderBy('tanggal', 'desc')
+       ->get()
+       ->toArray();
+        $pdf = PDF::loadView('admin.admin-pemesanan', compact('data'));
+        $todayDate = Carbon::now()->format('d-m-Y');
+        return $pdf->download('Transaksi Tanggal'.'-'.$todayDate.'.pdf');
+    }
 }

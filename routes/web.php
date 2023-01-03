@@ -57,7 +57,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/pesanan', 'OrderController@index')->name('admin.pesanan');
     Route::post('/tanggal', 'AdminController@caritanggal')->name('admin.dashboard');
     Route::post('/rute', 'AdminController@rute')->name('admin.dashboard');
-
+    Route::get('/pesanan/downloadpdf', 'OrderController@downloadpdf');
 
 
     Route::get('/register', 'Auth\AdminRegisterController@showRegistrationForm')->name('admin.register');
