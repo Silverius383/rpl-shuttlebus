@@ -28,8 +28,8 @@
                             Personal
                             @endif</p>
                         <hr>
-                        <p class="card-text"><small class="text-muted">Booked on : {{$schedule->created_at}}</small></p>
-                        <p class="card-text"><small class="text-muted">Updated on : {{$schedule->updated_at}}</small>
+                        <p class="card-text"><small class="text-muted">Added at : {{$schedule->created_at}}</small></p>
+                        <p class="card-text"><small class="text-muted">Updated at : {{$schedule->updated_at}}</small>
                         </p>
                     </div>
             </div>

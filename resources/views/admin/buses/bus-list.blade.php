@@ -36,7 +36,6 @@
                       <tr>
                         <td>{{ ++$key }}</td>
                         <td>
-                        <img style="height:20px; width:20px; background-color:powderblue;" src="/storage/bus_images/{{$bus->bus_image}}">
                           <a data-toggle="modal" data-target="#exampleModalCenterviewOperator
                             {{$bus->bus_id}}"data-toggle="tooltip">{{ $bus->bus_name }}</a></td>
                         <td>{{ $bus->bus_num }}</td>

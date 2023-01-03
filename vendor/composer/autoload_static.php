@@ -663,6 +663,7 @@ class ComposerStaticInit452814187f4cb7a9a5aac1519d23a5db
         'App\\Http\\Controllers\\FileUpload' => __DIR__ . '/../..' . '/app/Http/Controllers/FileUpload.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\ManagerController' => __DIR__ . '/../..' . '/app/Http/Controllers/ManagerController.php',
+        'App\\Http\\Controllers\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/OrderController.php',
         'App\\Http\\Controllers\\StationController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationController.php',
         'App\\Http\\Controllers\\StationmgController' => __DIR__ . '/../..' . '/app/Http/Controllers/StationmgController.php',
         'App\\Http\\Controllers\\UploadFileController' => __DIR__ . '/../..' . '/app/Http/Controllers/UploadFileController.php',

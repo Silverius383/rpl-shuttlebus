@@ -6,10 +6,7 @@
           <div class="row">
             <div class="col-md-12">
             <span class="pull-center">
-            <a href="#" data-toggle="modal" data-target="#addSchedule" 
-            data-toggle="tooltip" type="button" class="btn btn-sm btn-warning">
-            <i class="glyphicon glyphicon-plus"></i> Tambah Jadwal Baru</a>
-            </span>
+            
             <br>
             <br>
               <div class="card">

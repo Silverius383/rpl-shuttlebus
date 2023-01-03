@@ -11,19 +11,14 @@
         </div>
         <div class="modal-body">
             <div class="card mb-3">
-                <img style="heigth:40px; width:40px; background-color:powderblue;" 
+                <img style="height:40px; width:40px; background-color:powderblue;" 
                 src="/storage/bus_images/{{$bus->bus_image}}">
                 <div class="card-body">                                             
                 <h5 class="card-title">Name : {{$bus->bus_name}}</h5>
                 <p class="card-text">Id : {{$bus->bus_id}}</p>
                 <p class="card-text">Bus Number : {{$bus->bus_num}}</p>
                 <p class="card-text">Contact Number : {{$bus->phone}}</p>
-                <p class="card-text">Seats :
-                <?php 
-                  for ($i=1; $i<=12 ; $i++) { ?>
-                  <input disabled="disabled" type="checkbox" name="seats[]" value="{{ $i }}" <?php if(in_array("$i", (array)$bus->seats)){echo "checked";}?>>{{ $i }}
-                <?php } ?>
-                </p>
+                <p class="card-text">Seats : {{$bus->total_seats}}</p>
                 <p class="card-text">Status : @if($bus->status == 1)
                 Available
               @else
