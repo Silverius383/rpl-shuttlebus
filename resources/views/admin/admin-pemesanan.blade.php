@@ -4,7 +4,7 @@
 <div class="container-fluid">
 
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">DashBoard</h1>
+<h1 class="h3 mb-4 text-gray-800">Rincian jumlah transaksi</h1>
 <!-- Content Row -->
 <div class="row">
 
@@ -15,7 +15,6 @@
             <th scope="col">No</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col">Jumlah Tiket Dipesan</th>
-                <th scope="col">Aksi</th>
             </tr> 
             </thead>
             <tbody>
@@ -24,13 +23,7 @@
             <td>{{$index}}</td>
             <td>{{json_encode($value->tanggal)}}</td>
             <td>{{json_encode($value->jumlah)}}</td>
-            <td> 
-                    <div class="row " >
-                        <div>
-                        <a href="/admin/pesanan/downloadpdf" class="btn btn-sm btn-warning">download</a>
-                        </div>                      
-                    </div>
-                  </td>
+            
         </tr>
     @endforeach
             </tbody>

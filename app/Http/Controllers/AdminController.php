@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 use DB;
 use Session;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -146,4 +146,31 @@ class AdminController extends Controller
             Session::flash('success', 'Email Berhasil Terkirim ke ' .$user_email);
         return redirect(route('admin.indexbus'));
     }
+    public function viewarea() {
+        $book1 = DB::table('bookings')->whereColumn('source', '=', 'destination')->get();
+        $book2 = DB::table('bookings')->whereColumn('source', '!=', 'destination')->get();
+
+
+        return view('admin.laporanarea',compact('book1','book2'));
+    }
+    public function viewwaktu() {
+        $dateS = Carbon::now()->startOfMonth();
+        $dateE = Carbon::now()->endOfMonth();
+        $book = DB::table('bookings')->whereBetween('created_at',[$dateS, $dateE])->get();
+        return view('admin.laporanwaktu',compact('book'));
+    }
+    public function downloadarea(){
+        $book1 = DB::table('bookings')->whereColumn('source', '=', 'destination')->get();
+        $book2 = DB::table('bookings')->whereColumn('source', '!=', 'destination')->get();
+        $pdf = PDF::loadView('admin.laporanarea', array('book1' => $book1,'book2'=>$book2));
+        return $pdf->download('LaporanPerArea'.'.pdf');
+    }
+    public function downloadwaktu(){
+        $dateS = Carbon::now()->startOfMonth();
+        $dateE = Carbon::now()->endOfMonth();
+        $book = DB::table('bookings')->whereBetween('created_at',[$dateS, $dateE])->get();
+        $pdf = PDF::loadView('admin.laporanwaktu', array('book' => $book));
+        return $pdf->download('LaporanPerBulan'.'.pdf');
+    }
+
 }

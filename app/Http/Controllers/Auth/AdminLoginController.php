@@ -33,7 +33,7 @@ class AdminLoginController extends Controller
         
         if(Auth::guard('admin')->attempt($credentials, $request->remember))
         {
-            return redirect()->route('admin.dashboard');
+            return redirect('/admin');
         }
 
         return redirect()->back()->withInput($request->only('email'));

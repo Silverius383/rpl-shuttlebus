@@ -4,7 +4,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">DashBoard</h1>
+    <h1 class="h3 mb-4 text-gray-800 font-weight-bold">DashBoard</h1>
     <!-- Content Row -->
     <div class="row">
 
@@ -122,6 +122,26 @@
                 </div>
             </div>
         </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Cetak
+                                    Transaksi Per Area</a></div>
+                            <div class="h2 mb-0 font-weight-bold text-gray-800 ">
+                                <div>
+                                    <a href="/admin/viewarea" class="btn btn-md btn-info">view</a>
+
+                                    <a href="/admin/downloadarea" class="btn btn-md btn-info">Download</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
     <div class="row">
@@ -136,23 +156,15 @@
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a
                                         href="">Masukkan
                                         Tanggal</a></div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="waktuawal">Tanggal Awal</label>
-                                        <input name="waktuawal" id="waktuawal" class="form-control"
-                                            aria-describedby="emailHelp" type="date">
-                                        <label for="waktuakhir">Tanggal Akhir</label>
-                                        <input name="waktuakhir" id="waktuakhir" class="form-control"
-                                            aria-describedby="emailHelp" type="date">
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
+                                <div class="col-md-5 form-group">
+                                    <label for="waktuawal">Tanggal Awal</label>
+                                    <input name="waktuawal" id="waktuawal" class="form-control"
+                                        aria-describedby="emailHelp" type="date">
+                                    <label for="waktuakhir">Tanggal Akhir</label>
+                                    <input name="waktuakhir" id="waktuakhir" class="form-control"
+                                        aria-describedby="emailHelp" type="date">
+                                    <button type="submit" class="btn btn-success">Cari</button>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
-                                    </div>
                                 </div>
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Total
                                         Transaksi per periode</a></div>
@@ -185,8 +197,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                    <div >
+                                        <button type="submit" class="btn btn-success">Cari</button>
                                     </div>
                                 </div>
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Total
@@ -220,8 +232,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Cari</button>
+                                    <div>
+                                        <button type="submit" class="btn btn-success">Cari</button>
                                     </div>
                                 </div>
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Total
@@ -234,6 +246,26 @@
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow  py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1"><a href="">Cetak
+                                    Transaksi Per Bulan</a></div>
+                            <div class="h2 mb-0 font-weight-bold text-gray-800 ">
+                                <div>
+                                    <a href="/admin/viewwaktu" class="btn btn-md btn-info">view</a>
+
+                                    <a href="/admin/downloadwaktu" class="btn btn-md btn-info">Download</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -33,7 +33,7 @@ class ManagerLoginController extends Controller
         
         if(Auth::guard('manager')->attempt($credentials, $request->remember))
         {
-            return redirect()->route('manager.dashboard');
+            return redirect('/manager');
         }
 
         return redirect()->back()->withInput($request->only('email'));
