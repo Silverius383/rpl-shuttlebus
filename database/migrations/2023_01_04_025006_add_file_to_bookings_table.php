@@ -14,7 +14,7 @@ class AddFileToBookingsTable extends Migration
     public function up()
     {
         Schema::table('bookings', function (Blueprint $table) {
-            $table->string('file')->after('status');
+            $table->string('file')->nullable()->after('status');
         });
     }
 
