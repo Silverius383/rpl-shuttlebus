@@ -332,5 +332,17 @@ class BookingController extends Controller
         $todayDate = Carbon::now()->format('d-m-Y');
         return $pdf->download('invoice'.'-'.$todayDate.'.pdf');
     }
+
+    public function upload($id){
+        $booking = Booking::find($id);
+        return view('customer.uploadfile', ['booking'=>$booking]);
+    }
+
+    public function fileupload($id, $url){
+        $order = Booking::find($id);
+        $order->file =$url;
+        $order->save();
+        return redirect('/home/booking');
+    }
     
 }

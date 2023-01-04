@@ -47,19 +47,13 @@ class OrderController extends Controller
     return view('admin.admin-pemesanan', compact('data'));
 
     }
+    // public function viewpdf(){
+    //     $book1 = DB::table('bookings')->whereColumn('source', '=', 'destination')->where('validasi',1)->get();
+    //     // $booking = Booking::find($booking_id);
+    //     // $view = Booking::findOrFail($booking_id);
+    //     $users = DB::table('v_bus')->select('booking_id','bus_id','bus_name','price','bus_num')->get();
+
+    //     return view('customer.invoice', compact('booking', 'users'));
+    // }
     
-    public function downloadpdf(){
-        $data = \DB::table('bookings')
-       ->select([
-        \DB::raw('count(*) as jumlah'),
-        \DB::raw('DATE(created_at) as tanggal')
-       ])
-       ->groupBy('tanggal')
-       ->orderBy('tanggal', 'desc')
-       ->get()
-       ->toArray();
-        $pdf = PDF::loadView('admin.admin-pemesanan', compact('data'));
-        $todayDate = Carbon::now()->format('d-m-Y');
-        return $pdf->download('Transaksi Tanggal'.'-'.$todayDate.'.pdf');
-    }
 }

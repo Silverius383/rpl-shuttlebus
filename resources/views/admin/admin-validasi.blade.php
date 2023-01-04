@@ -64,9 +64,8 @@
                 <td> 
                     <div class="row " >
                         <div>
-                        <a href="/home/booking/{{ $booking->booking_id }}/downloadpdf" class="btn btn-sm btn-warning">Download</a>
                         <a href="/admin/booking/{{ $booking->booking_id }}/sendmail" class="btn btn-sm btn-info">Verify Ticket</a>
-                        <a href="/home/booking/{{ $booking->booking_id }}/viewpdf" class="btn btn-sm btn-warning">View</a>
+                        <a href="/admin/booking/{{ $booking->booking_id }}/viewpdf" class="btn btn-sm btn-warning">View Ticket</a>
                         </div>                      
                     </div>
                   </td>

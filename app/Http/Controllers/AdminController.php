@@ -146,6 +146,15 @@ class AdminController extends Controller
             Session::flash('success', 'Email Berhasil Terkirim ke ' .$user_email);
         return redirect(route('admin.indexbus'));
     }
+    public function viewpdf(int $booking_id){
+        $booking = Booking::find($booking_id);
+        $view = Booking::findOrFail($booking_id);
+        $user = User::where('id', $booking->customer_id)->first();
+        $users = DB::table('v_bus')->select('booking_id','bus_id','bus_name','price','bus_num')->get();
+
+        return view('customer.invoicebuatan', compact('booking', 'users', 'user'));
+    }
+
     public function viewarea() {
         $book1 = DB::table('bookings')->whereColumn('source', '=', 'destination')->get();
         $book2 = DB::table('bookings')->whereColumn('source', '!=', 'destination')->get();

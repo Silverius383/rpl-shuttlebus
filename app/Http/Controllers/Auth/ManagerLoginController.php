@@ -11,7 +11,7 @@ class ManagerLoginController extends Controller
     public function __construct()
     {
         // $this->middleware('guest:manager')->except('logout');
-        $this->middleware('guest:web')->except('logout');
+        $this->middleware('guest:manager')->except('logout');
     }
 
     public function showLoginForm()

@@ -40,6 +40,9 @@ Route::prefix('home')->group(function(){
     Route::get('/booking/{booking_id}/edit', 'BookingController@edit')->name('booking.edit');
     Route::post('/booking/{booking_id}/update', 'BookingController@update')->name('booking.update');
     Route::get('/booking/{booking_id}/delete', 'BookingController@destroy')->name('booking.delete');
+    Route::get('/booking/{booking_id}/upload', 'BookingController@upload')->name('booking.upload');
+    Route::get('/booking/{booking_id}/upload/{url}', 'BookingController@fileupload')->name('booking.fileupload');
+
 
 
     Route::get('booking/success/{booking_id}', 'BookingController@success')->name('success');
@@ -54,6 +57,7 @@ Route::prefix('admin')->group(function(){
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/booking', 'AdminController@indexbus')->name('admin.indexbus');
     Route::get('/booking/{booking_id}/sendmail', 'AdminController@sendmail');
+    Route::get('/booking/{booking_id}/viewpdf', 'AdminController@viewpdf');
     Route::get('/pesanan', 'OrderController@index')->name('admin.pesanan');
     Route::get('/pesanan/downloadpdf', 'OrderController@downloadpdf');
     Route::post('/tanggal', 'AdminController@caritanggal')->name('admin.dashboard');
@@ -95,7 +99,7 @@ Route::prefix('manager')->group(function(){
     Route::get('/logout', 'Auth\ManagerLoginController@logout')->name('manager.logout');
     Route::post('/tanggal', 'ManagerController@caritanggalmg')->name('manager.dashboard');
     Route::post('/rute', 'ManagerController@rute')->name('manager.dashboard');
-    Route::post('/institusi', 'ManagerController@institusiperkota')->name('manager.dashboard');
+    Route::post('/institusi', 'ManagerController@institusiperkota');
 
     Route::get('/register', 'Auth\ManagerRegisterController@showRegistrationForm')->name('manager.register');
     Route::post('/register', 'Auth\ManagerRegisterController@register')->name('manager.register.submit');

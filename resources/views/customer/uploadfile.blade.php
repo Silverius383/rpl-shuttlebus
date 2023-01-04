@@ -17,6 +17,17 @@
         const client = filestack.init('AD7bNP33KS2KtLmnyxHXbz'); 
 
         let options = {
+          onFileUploadFinished(file){
+            var url = new URL(file.url);
+            var id = document.getElementById("orderId").value
+
+            window.location.href = "/home/booking/" + id + "/upload" + url.pathname;
+          },
+          onFileSelected: file => {
+            if (file.size > 3000*1000){
+              throw new Error('Ukuran file terlalu besar')
+            }
+          },
           "displayMode": "inline",
           "container": ".picker-content",
           "accept": [
@@ -28,13 +39,12 @@
             "local_file_system"
           ],
           "uploadInBackground": false,
-          "onUploadDone": (res) => console.log(res),
         };
-
-        picker = client.picker(options);
-        picker.open();
+        client.picker(options).open();
       });
     </script>
-    <div class="picker-content"></div>
+    <div class="picker-content">
+      <input type="hidden" id="orderId" value="{{$booking->booking_id}}"> 
+    </div>
 </body>
 </html>

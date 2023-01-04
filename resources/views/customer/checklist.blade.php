@@ -56,7 +56,7 @@
                 <td> 
                     <div class="row " >
                         <div  >
-                        <a href="/home/uploadfile" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-upload"></i></a>
+                        <a href="/home/booking/{{ $booking->booking_id }}/upload" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-upload"></i></a>
                         <a href="/home/booking/{{ $booking->booking_id }}/edit" class="btn btn-sm btn-info"><i class="glyphicon glyphicon-edit"></i></a>
                         <a href="{{ url('/home/booking/'.$booking->booking_id.'/delete') }}" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-trash"></i></a>
                         <a href="/home/booking/{{ $booking->booking_id }}/downloadpdf" class="btn btn-sm btn-warning">download</a>
