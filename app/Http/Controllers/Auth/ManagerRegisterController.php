@@ -43,7 +43,7 @@ class ManagerRegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:manager');
+        $this->middleware('auth:admin');
         // $this->middleware('guest:admin');
     }
 
